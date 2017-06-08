@@ -27,3 +27,14 @@ In case you are working on a branch and there are other commits in your PR which
 1. do `git log` to find the hash for your new squashed commit. 
 1. checkout your `tmp` branch
 1. `git cherry-pick df3d4f8e2078e91058c630a92a1ac01f35af07f4`
+
+
+In case you are working on a brnach and you need to synch with master but merge adds all kinds of commits (can happen if you branched from a different branched, which was merged and squashed), here is what you can do:
+1. backup your brnach `git checkout -b BRANCH-123_bak`
+1. go back to your branch `git checkout -`
+1. open a new console window to show all your commits `git log --grep=BRANCH-123 --online`
+1. reset your brnach to the master `git reset --hard upstream/master`
+1. cherry pick your commits `git cherry-pick 7c3b0ca` in case you have a range of commits you can do this with one command `git cherry-pick 7c3b0ca^..26aeeb8` add the `^` to include the first hash. 
+1. resolve any conflicts in case there are
+1. push your commits `git push --force origin BRANCH-123`
+1. remove the backup branch if all was ok. 
